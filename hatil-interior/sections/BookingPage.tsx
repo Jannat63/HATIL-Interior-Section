@@ -144,38 +144,52 @@ export default function BookingPage() {
           </div>
 
           {/* RIGHT PANEL */}
-          <div className="bg-gradient-to-br from-[#fafafa] to-[#f0f0f0] p-8 rounded-2xl shadow-md border border-gray-100">
+<div className="bg-gradient-to-br from-[#fafafa] to-[#f0f0f0] p-8 rounded-2xl shadow-md border border-gray-100">
 
-            <h3 className="text-xl font-semibold mb-6 text-[#1F1F1F]">
-              Why Choose HATIL?
-            </h3>
+  {/* CONTACT INFO */}
+  <h3 className="text-xl font-semibold mb-6 text-[#1F1F1F]">
+    Our Contact
+  </h3>
 
-            <ul className="space-y-4 text-gray-700 mb-8">
-              <li>✔ 10+ Years Experience</li>
-              <li>✔ 500+ Projects Completed</li>
-              <li>✔ End-to-End Interior Solution</li>
-            </ul>
+  <div className="space-y-3 text-gray-700 text-sm mb-6">
+    <p>📍 Shewrapara, Rokeya Sarani, Mirpur, Dhaka 1216</p>
+    <p>📞 +88 02 58054370</p>
+    <p>📞 +88 01715440000</p>
+    <p>✉ info@hatil.com</p>
+  </div>
 
-            <h3 className="text-lg font-semibold mb-4 text-[#1F1F1F]">
-              Contact Information
-            </h3>
+  {/* MAP */}
+  <div className="rounded-xl overflow-hidden mb-8 border border-gray-200">
+    <iframe
+      src="https://maps.google.com/maps?q=hatil%20mirpur%20dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      className="w-full h-48 border-0"
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
 
-            <div className="space-y-2 text-gray-700 text-sm mb-6">
-              <p>📍 Mirpur, Dhaka, Bangladesh</p>
-              <p>📞 +8801XXXXXXXXX</p>
-              <p>✉ info@hatil.com</p>
-            </div>
+  {/* TRUST POINTS */}
+  <div className="space-y-3 text-gray-700 mb-8 text-sm">
+    <p>✔ 10+ Years Experience</p>
+    <p>✔ 500+ Projects Completed</p>
+    <p>✔ End-to-End Interior Solution</p>
+  </div>
 
-            <div className="bg-white p-5 rounded-xl text-center shadow-sm border border-gray-100">
-              <p className="text-sm text-gray-500 mb-2">
-                Prefer to talk directly?
-              </p>
-              <p className="text-[#E11D2E] font-semibold text-lg">
-                Call Now: +8801XXXXXXXXX
-              </p>
-            </div>
+  {/* CALL CTA */}
+  <div className="bg-white p-5 rounded-xl text-center shadow-sm border border-gray-100">
+    <p className="text-sm text-gray-500 mb-2">
+      Prefer to talk directly?
+    </p>
 
-          </div>
+    <a
+      href="tel:+8801715440000"
+      className="text-[#E11D2E] font-semibold text-lg hover:underline"
+    >
+      Call us now: +88 01715440000
+    </a>
+  </div>
+
+</div>
 
         </div>
       </section>

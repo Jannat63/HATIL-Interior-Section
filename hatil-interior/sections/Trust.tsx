@@ -1,42 +1,69 @@
 export default function Trust() {
+const logos = [
+  "https://cdn.simpleicons.org/google/000000",
+  "https://cdn.simpleicons.org/microsoft/000000",
+  "https://cdn.simpleicons.org/amazon/000000",
+  "https://cdn.simpleicons.org/netflix/000000",
+  "https://cdn.simpleicons.org/airbnb/000000",
+  "https://cdn.simpleicons.org/apple/000000",
+  "https://cdn.simpleicons.org/meta/000000",
+  "https://cdn.simpleicons.org/tesla/000000",
+  "https://cdn.simpleicons.org/spotify/000000",
+  "https://cdn.simpleicons.org/adobe/000000",
+  "https://cdn.simpleicons.org/samsung/000000",
+  "https://cdn.simpleicons.org/intel/000000",
+  "https://cdn.simpleicons.org/ibm/000000",
+  "https://cdn.simpleicons.org/oracle/000000",
+  "https://cdn.simpleicons.org/nvidia/000000",
+];
   return (
-    <section className="py-20 bg-gradient-to-b from-[#f5f5f5] to-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-24 bg-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 text-center">
 
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-
-          {/* YEARS */}
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-            <h2 className="text-4xl font-bold text-[#1F1F1F] mb-2">
-              10+
-            </h2>
-            <p className="text-gray-600 text-sm tracking-wide">
+        {/* STATS */}
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h2 className="text-5xl font-bold text-[#1F1F1F]">10+</h2>
+            <p className="text-gray-600 mt-2 tracking-wide">
               Years Experience
             </p>
           </div>
 
-          {/* PROJECTS */}
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-            <h2 className="text-4xl font-bold text-[#1F1F1F] mb-2">
-              500+
-            </h2>
-            <p className="text-gray-600 text-sm tracking-wide">
+          <div>
+            <h2 className="text-5xl font-bold text-[#1F1F1F]">500+</h2>
+            <p className="text-gray-600 mt-2 tracking-wide">
               Projects Completed
             </p>
           </div>
+        </div>
 
-          {/* BRANDS */}
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-            <h3 className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wide">
-              Trusted by Leading Brands
-            </h3>
+        {/* DIVIDER */}
+        <div className="w-16 h-[2px] bg-[#E11D2E] mx-auto mb-12"></div>
 
-            <div className="flex justify-center gap-4 flex-wrap text-[#1F1F1F] font-medium">
-              <span className="hover:text-[#E11D2E] transition">Walton</span>
-              <span className="hover:text-[#E11D2E] transition">Jamuna</span>
-              <span className="hover:text-[#E11D2E] transition">Bashundhara</span>
-            </div>
-          </div>
+        {/* TITLE */}
+        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-10">
+          Trusted by Leading Brands
+        </h3>
+
+      </div>
+
+      {/* MARQUEE */}
+      <div className="relative overflow-hidden">
+
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+
+        <div className="animate-marquee gap-20">
+
+          {[...logos, ...logos].map((logo, i) => (
+            <img
+              key={i}
+              src={logo}
+              alt="brand"
+              className="h-10 min-w-[120px] w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            />
+          ))}
 
         </div>
 

@@ -70,40 +70,46 @@ export default function ResidentialPage() {
       </section>
 
       {/* PROCESS */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+<section className="py-24 bg-white">
+  <div className="max-w-6xl mx-auto px-6 text-center">
 
-          <h2 className="text-4xl font-semibold text-[#1F1F1F] mb-16">
-            Our Design Process
-          </h2>
+    <h2 className="text-4xl font-semibold text-[#1F1F1F] mb-20">
+      Our Design Process
+    </h2>
 
-          {/* CENTERED LINE (FIXED) */}
-          <div className="hidden md:block absolute top-[155px] left-1/2 -translate-x-1/2 w-[80%] h-[2px] bg-gray-200"></div>
+    <div className="relative flex items-center justify-between">
 
-          <div className="grid md:grid-cols-5 gap-8 relative z-10">
-            {[
-              "Consultation",
-              "Planning",
-              "3D Design",
-              "Execution",
-              "Handover",
-            ].map((step, i) => (
-              <div key={i} className="flex flex-col items-center">
+      {/* LINE */}
+      <div className="absolute top-7 left-0 w-full h-[2px] bg-gray-200 z-0"></div>
 
-                <div className="w-14 h-14 bg-[#E11D2E] text-white flex items-center justify-center rounded-full shadow-lg mb-4 hover:scale-110 transition">
-                  {i + 1}
-                </div>
+      {[
+        "Consultation",
+        "Planning",
+        "3D Design",
+        "Execution",
+        "Handover",
+      ].map((step, i) => (
+        
+        <div key={i} className="relative z-10 flex flex-col items-center">
 
-                <p className="text-sm text-[#1F1F1F] font-medium">
-                  {step}
-                </p>
-
-              </div>
-            ))}
+          {/* CIRCLE */}
+          <div className="w-14 h-14 bg-[#E11D2E] text-white flex items-center justify-center rounded-full shadow-lg mb-4 hover:scale-110 transition">
+            {i + 1}
           </div>
 
+          {/* TEXT */}
+          <p className="text-sm text-[#1F1F1F] font-medium">
+            {step}
+          </p>
+
         </div>
-      </section>
+
+      ))}
+
+    </div>
+
+  </div>
+</section>
 
       {/* CTA */}
 <section className="py-28 bg-gradient-to-r from-[#f8f8f8] via-white to-[#f8f8f8] text-center relative overflow-hidden">
