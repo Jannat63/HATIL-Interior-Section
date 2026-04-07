@@ -1,33 +1,41 @@
+import Link from "next/link";
+
 export default function FeaturedProjects() {
   const projects = [
     {
       title: "Modern Apartment in Dhaka",
       location: "Residential",
+      slug: "modern-apartment",
       img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
     },
     {
-      title: "Luxury Office Interior",
-      location: "Gulshan",
+      title: "Elegant Office in Gulshan",
+      location: "Office",
+      slug: "elegant-office",
       img: "https://images.unsplash.com/photo-1604328698692-f76ea9498e76",
     },
     {
-      title: "Elegant Living Space",
+      title: "Luxury Living Space",
       location: "Dhanmondi",
+      slug: "luxury-bedroom",
       img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
     },
     {
       title: "Corporate Workspace",
       location: "Dhaka",
+      slug: "corporate-workspace",
       img: "https://images.unsplash.com/photo-1598300056393-4aac492f4344",
     },
     {
       title: "Minimal Bedroom Design",
       location: "Banani",
+      slug: "luxury-bedroom",
       img: "https://images.unsplash.com/photo-1615874959474-d609969a20ed",
     },
     {
       title: "Premium Dining Area",
       location: "Uttara",
+      slug: "dining-interior",
       img: "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a",
     },
   ];
@@ -36,7 +44,7 @@ export default function FeaturedProjects() {
     <section className="py-20 bg-[#F9F9F9]">
       <div className="max-w-6xl mx-auto px-6">
         
-        {/* Section Title */}
+        {/* Title */}
         <h2 className="text-3xl font-semibold text-center text-[#1F1F1F] mb-12">
           Featured Projects
         </h2>
@@ -44,9 +52,10 @@ export default function FeaturedProjects() {
         {/* Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           {projects.map((p, i) => (
-            <div
+            <Link
               key={i}
-              className="relative group overflow-hidden rounded-xl"
+              href={`/projects/${p.slug}`}
+              className="relative group overflow-hidden rounded-xl block"
             >
               {/* Image */}
               <img
@@ -66,7 +75,7 @@ export default function FeaturedProjects() {
                   View Case Study →
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

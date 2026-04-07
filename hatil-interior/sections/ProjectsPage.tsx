@@ -1,33 +1,41 @@
+import Link from "next/link";
+
 export default function ProjectsPage() {
   const projects = [
     {
       title: "Modern Apartment in Dhaka",
       location: "Residential",
+      slug: "modern-apartment",
       img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
     },
     {
       title: "Cozy Café",
       location: "Banani",
+      slug: "cozy-cafe",
       img: "https://images.unsplash.com/photo-1554995207-c18c203602cb",
     },
     {
       title: "Elegant Office",
       location: "Gulshan",
+      slug: "elegant-office",
       img: "https://images.unsplash.com/photo-1604328698692-f76ea9498e76",
     },
     {
       title: "Corporate Workspace",
       location: "Dhaka",
+      slug: "corporate-workspace",
       img: "https://images.unsplash.com/photo-1598300056393-4aac492f4344",
     },
     {
       title: "Luxury Bedroom",
       location: "Dhanmondi",
+      slug: "luxury-bedroom",
       img: "https://images.unsplash.com/photo-1615874959474-d609969a20ed",
     },
     {
       title: "Dining Interior",
       location: "Uttara",
+      slug: "dining-interior",
       img: "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a",
     },
   ];
@@ -42,7 +50,6 @@ export default function ProjectsPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Premium gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent" />
 
         <div className="relative z-10 max-w-4xl px-6 ml-10 md:ml-20">
@@ -56,7 +63,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* FILTER (UI only for now) */}
+      {/* FILTER */}
       <section className="py-10 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 flex gap-6 justify-center text-sm">
           <button className="text-[#E11D2E] font-semibold">All</button>
@@ -71,9 +78,10 @@ export default function ProjectsPage() {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
 
           {projects.map((p, i) => (
-            <div
+            <Link
               key={i}
-              className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-300"
+              href={`/projects/${p.slug}`}
+              className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-300 block"
             >
               {/* Image */}
               <img
@@ -93,13 +101,13 @@ export default function ProjectsPage() {
                   View Case Study →
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
 
         </div>
       </section>
 
-      {/* FEATURED BLOCK (NEW 🔥) */}
+      {/* FEATURED */}
       <section className="py-24 bg-[#F9F9F9]">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
 
@@ -127,9 +135,12 @@ export default function ProjectsPage() {
               visual sophistication.
             </p>
 
-            <button className="bg-[#E11D2E] text-white px-6 py-3 rounded-lg shadow-md hover:scale-105 transition">
+            <Link
+              href="/projects/luxury-apartment"
+              className="inline-block bg-[#E11D2E] text-white px-6 py-3 rounded-lg shadow-md hover:scale-105 transition"
+            >
               View Full Case Study
-            </button>
+            </Link>
           </div>
 
         </div>
