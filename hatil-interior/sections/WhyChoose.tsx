@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function WhyChoose() {
   const points = [
     {
@@ -37,7 +39,6 @@ export default function WhyChoose() {
               key={i}
               className="group p-7 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300"
             >
-              {/* Accent line */}
               <div className="w-10 h-[3px] bg-[#E11D2E] mb-4 rounded-full"></div>
 
               <h3 className="text-lg font-semibold text-[#1F1F1F] mb-2">
@@ -48,10 +49,13 @@ export default function WhyChoose() {
                 {item.desc}
               </p>
 
-              {/* Hover arrow */}
-              <div className="mt-4 text-sm text-[#E11D2E] opacity-0 group-hover:opacity-100 transition">
+              {/* LINKED BUTTON */}
+              <Link
+                href="/why-hatil"
+                className="mt-4 inline-block text-sm text-[#E11D2E] opacity-0 group-hover:opacity-100 transition"
+              >
                 Learn more →
-              </div>
+              </Link>
             </div>
           ))}
         </div>
