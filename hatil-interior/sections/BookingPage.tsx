@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function BookingPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,13 +19,25 @@ export default function BookingPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent" />
 
         <div className="relative z-10 max-w-4xl px-6 ml-10 md:ml-20">
-          <h1 className="text-5xl md:text-6xl font-semibold text-[#1F1F1F] mb-4 leading-tight">
-            Book Your Interior Consultation
-          </h1>
 
-          <p className="text-lg text-gray-700 max-w-xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-6xl font-semibold text-[#1F1F1F] mb-4 leading-tight"
+          >
+            Book Your Interior Consultation
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-700 max-w-xl"
+          >
             Let’s design your dream space together with HATIL experts.
-          </p>
+          </motion.p>
+
         </div>
       </section>
 
@@ -32,7 +46,13 @@ export default function BookingPage() {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
 
           {/* FORM */}
-          <div className="bg-[#FAFAFA] p-8 rounded-2xl shadow-md border border-gray-100">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="bg-white p-8 rounded-2xl shadow-md border border-gray-100"
+          >
 
             <h2 className="text-2xl font-semibold mb-6 text-[#1F1F1F]">
               Get a Free Consultation
@@ -46,60 +66,31 @@ export default function BookingPage() {
               className="space-y-5"
             >
 
-              {/* Name */}
-              <div>
-                <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E]"
-                  placeholder="Enter your full name"
-                />
-              </div>
+              {/* INPUT STYLE (FIXED) */}
+              {[
+                { label: "Full Name", type: "text", placeholder: "Enter your full name" },
+                { label: "Phone Number", type: "text", placeholder: "Enter your phone number" },
+                { label: "Email Address", type: "email", placeholder: "Enter your email" },
+                { label: "Location", type: "text", placeholder: "Enter your location" },
+              ].map((field, i) => (
+                <div key={i}>
+                  <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E] focus:border-[#E11D2E] transition"
+                  />
+                </div>
+              ))}
 
-              {/* Phone */}
-              <div>
-                <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E]"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E]"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              {/* Location */}
-              <div>
-                <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E]"
-                  placeholder="Enter your location"
-                />
-              </div>
-
-              {/* Project Type */}
+              {/* SELECT */}
               <div>
                 <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
                   Project Type
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] shadow-sm focus:ring-2 focus:ring-[#E11D2E]">
+                <select className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E] focus:border-[#E11D2E] transition">
                   <option>Select project type</option>
                   <option>Residential</option>
                   <option>Office</option>
@@ -107,12 +98,12 @@ export default function BookingPage() {
                 </select>
               </div>
 
-              {/* Budget */}
+              {/* SELECT */}
               <div>
                 <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
                   Budget Range
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] shadow-sm focus:ring-2 focus:ring-[#E11D2E]">
+                <select className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E] focus:border-[#E11D2E] transition">
                   <option>Select budget</option>
                   <option>Below 5 Lakh</option>
                   <option>5–10 Lakh</option>
@@ -120,15 +111,15 @@ export default function BookingPage() {
                 </select>
               </div>
 
-              {/* Message */}
+              {/* TEXTAREA */}
               <div>
                 <label className="text-sm font-medium text-[#1F1F1F] mb-1 block">
                   Project Details
                 </label>
                 <textarea
                   rows={4}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-[#E11D2E]"
                   placeholder="Tell us about your project..."
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-[#1F1F1F] placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E11D2E] focus:border-[#E11D2E] transition"
                 />
               </div>
 
@@ -136,81 +127,85 @@ export default function BookingPage() {
                 We respect your privacy. Your information will not be shared.
               </p>
 
-              <button className="w-full bg-[#E11D2E] text-white py-4 rounded-lg font-semibold shadow-lg hover:scale-[1.02] hover:bg-red-700 active:scale-95 transition">
+              <button className="w-full bg-[#E11D2E] text-white py-4 rounded-lg font-semibold shadow-lg hover:scale-[1.02] hover:bg-red-700 transition">
                 Book Consultation
               </button>
 
             </form>
-          </div>
+          </motion.div>
 
           {/* RIGHT PANEL */}
-<div className="bg-gradient-to-br from-[#fafafa] to-[#f0f0f0] p-8 rounded-2xl shadow-md border border-gray-100">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="bg-gradient-to-br from-[#fafafa] to-[#f0f0f0] p-8 rounded-2xl shadow-md border border-gray-100"
+          >
 
-  {/* CONTACT INFO */}
-  <h3 className="text-xl font-semibold mb-6 text-[#1F1F1F]">
-    Our Contact
-  </h3>
+            <h3 className="text-xl font-semibold mb-6 text-[#1F1F1F]">
+              Our Contact
+            </h3>
 
-  <div className="space-y-3 text-gray-700 text-sm mb-6">
-    <p>📍 Shewrapara, Rokeya Sarani, Mirpur, Dhaka 1216</p>
-    <p>📞 +88 02 58054370</p>
-    <p>📞 +88 01715440000</p>
-    <p>✉ info@hatil.com</p>
-  </div>
+            <div className="space-y-3 text-gray-700 text-sm mb-6">
+              <p>📍 Shewrapara, Rokeya Sarani, Mirpur, Dhaka 1216</p>
+              <p>📞 +88 02 58054370</p>
+              <p>📞 +88 01715440000</p>
+              <p>✉ info@hatil.com</p>
+            </div>
 
-  {/* MAP */}
-  <div className="rounded-xl overflow-hidden mb-8 border border-gray-200">
-    <iframe
-      src="https://maps.google.com/maps?q=hatil%20mirpur%20dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
-      className="w-full h-48 border-0"
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-    ></iframe>
-  </div>
+            <div className="rounded-xl overflow-hidden mb-8 border">
+              <iframe
+                src="https://maps.google.com/maps?q=hatil%20mirpur%20dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-48 border-0"
+              ></iframe>
+            </div>
 
-  {/* TRUST POINTS */}
-  <div className="space-y-3 text-gray-700 mb-8 text-sm">
-    <p>✔ 10+ Years Experience</p>
-    <p>✔ 500+ Projects Completed</p>
-    <p>✔ End-to-End Interior Solution</p>
-  </div>
+            <div className="space-y-3 text-gray-700 mb-8 text-sm">
+              <p>✔ 10+ Years Experience</p>
+              <p>✔ 500+ Projects Completed</p>
+              <p>✔ End-to-End Interior Solution</p>
+            </div>
 
-  {/* CALL CTA */}
-  <div className="bg-white p-5 rounded-xl text-center shadow-sm border border-gray-100">
-    <p className="text-sm text-gray-500 mb-2">
-      Prefer to talk directly?
-    </p>
+            <div className="bg-white p-5 rounded-xl text-center shadow-sm border">
+              <p className="text-sm text-gray-500 mb-2">
+                Prefer to talk directly?
+              </p>
 
-    <a
-      href="tel:+8801715440000"
-      className="text-[#E11D2E] font-semibold text-lg hover:underline"
-    >
-      Call us now: +88 01715440000
-    </a>
-  </div>
+              <a
+                href="tel:+8801715440000"
+                className="text-[#E11D2E] font-semibold text-lg hover:underline"
+              >
+                Call us now: +88 01715440000
+              </a>
+            </div>
 
-</div>
+          </motion.div>
 
         </div>
       </section>
 
       {/* SUCCESS POPUP */}
       {submitted && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl"
+          >
             <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#E11D2E]/10">
               <span className="text-[#E11D2E] text-2xl">✓</span>
             </div>
 
-            <h2 className="text-2xl font-semibold text-[#1F1F1F] mb-2">
-              Thank You!
-            </h2>
+            <h2 className="text-2xl font-semibold mb-2">Thank You!</h2>
 
             <p className="text-gray-600 mb-6">
-              Thank you for reaching out to HATIL.  
-              Our design consultants will connect with you shortly to discuss your project in detail.
+              Our design consultants will contact you shortly.
             </p>
 
             <button
@@ -219,9 +214,8 @@ export default function BookingPage() {
             >
               Close
             </button>
-
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
     </main>

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ProjectsPage() {
   const projects = [
@@ -53,13 +56,25 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent" />
 
         <div className="relative z-10 max-w-4xl px-6 ml-10 md:ml-20">
-          <h1 className="text-5xl md:text-6xl font-semibold text-[#1F1F1F] mb-4">
-            Our Interior Projects
-          </h1>
 
-          <p className="text-lg text-gray-700">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-6xl font-semibold text-[#1F1F1F] mb-4"
+          >
+            Our Interior Projects
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-700"
+          >
             Explore spaces designed with precision & passion
-          </p>
+          </motion.p>
+
         </div>
       </section>
 
@@ -75,36 +90,60 @@ export default function ProjectsPage() {
 
       {/* GRID */}
       <section className="py-20">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+        <motion.div
+          className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.12,
+              },
+            },
+          }}
+        >
 
           {projects.map((p, i) => (
-            <Link
+
+            <motion.div
               key={i}
-              href={`/projects/${p.slug}`}
-              className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-300 block"
+              variants={{
+                hidden: { opacity: 0, y: 50, scale: 0.97 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.6 },
+                },
+              }}
             >
-              {/* Image */}
-              <img
-                src={p.img}
-                className="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
-              />
+              <Link
+                href={`/projects/${p.slug}`}
+                className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-300 block"
+              >
+                <img
+                  src={p.img}
+                  className="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
+                />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition" />
 
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 p-5 text-white">
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                <p className="text-sm text-gray-200 mb-2">{p.location}</p>
+                <div className="absolute bottom-0 left-0 p-5 text-white">
+                  <h3 className="text-lg font-semibold">{p.title}</h3>
+                  <p className="text-sm text-gray-200 mb-2">{p.location}</p>
 
-                <span className="text-sm text-[#ff4d4d] opacity-0 group-hover:opacity-100 transition">
-                  View Case Study →
-                </span>
-              </div>
-            </Link>
+                  <span className="text-sm text-[#ff4d4d] opacity-0 group-hover:opacity-100 transition">
+                    View Case Study →
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+
           ))}
 
-        </div>
+        </motion.div>
       </section>
 
       {/* FEATURED */}
@@ -112,15 +151,26 @@ export default function ProjectsPage() {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
 
           {/* Image */}
-          <div className="rounded-2xl overflow-hidden shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, scale: 1.05 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="rounded-2xl overflow-hidden shadow-lg"
+          >
             <img
               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+          >
             <h2 className="text-3xl font-semibold text-[#1F1F1F] mb-4">
               Featured Project
             </h2>
@@ -141,7 +191,7 @@ export default function ProjectsPage() {
             >
               View Full Case Study
             </Link>
-          </div>
+          </motion.div>
 
         </div>
       </section>

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function CaseStudy() {
   return (
@@ -6,10 +9,19 @@ export default function CaseStudy() {
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
         {/* LEFT IMAGE */}
-        <div className="relative rounded-xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.05 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+          className="relative rounded-xl overflow-hidden"
+        >
           <img
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition duration-700"
           />
 
           {/* Overlay text */}
@@ -18,10 +30,19 @@ export default function CaseStudy() {
               Luxury Apartment in Dhaka
             </h3>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT CONTENT */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.8,
+            delay: 0.2,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+        >
           <h2 className="text-3xl font-semibold text-[#1F1F1F] mb-6">
             Featured Case Study
           </h2>
@@ -57,12 +78,12 @@ export default function CaseStudy() {
 
           {/* CTA */}
           <Link
-  href="/projects/luxury-apartment"
-  className="inline-block bg-[#E11D2E] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition"
->
-  View Full Case Study
-</Link>
-        </div>
+            href="/projects/luxury-apartment"
+            className="inline-block bg-[#E11D2E] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition"
+          >
+            View Full Case Study
+          </Link>
+        </motion.div>
 
       </div>
     </section>

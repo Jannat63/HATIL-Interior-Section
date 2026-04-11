@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
@@ -14,27 +17,53 @@ export default function Hero() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-white/60" />
 
-      {/* ❌ REMOVE mx-auto */}
       <div className="relative z-10 px-6 md:px-16">
 
-        {/* Content */}
         <div className="max-w-xl">
 
-          <h1 className="text-6xl md:text-6xl font-semibold leading-tight text-[#1F1F1F] mb-6">
+          {/* TITLE */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            className="text-6xl md:text-6xl font-semibold leading-tight text-[#1F1F1F] mb-6"
+          >
             Transform Your Space
             Into a Living Experience
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg text-gray-700 mb-8">
-            Interior Design Services by HATIL — Where comfort meets craftsmanship.
-          </p>
-
-          <Link
-            href="/book"
-            className="inline-block bg-[#E11D2E] hover:bg-red-700 active:scale-95 transition duration-300 px-8 py-4 rounded-xl text-white font-semibold shadow-lg"
+          {/* SUBTITLE */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.2,
+              duration: 0.7,
+            }}
+            className="text-lg text-gray-700 mb-8"
           >
-            Book Free Consultation
-          </Link>
+            Interior Design Services by HATIL — Where comfort meets craftsmanship.
+          </motion.p>
+
+          {/* BUTTON */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.4,
+              duration: 0.6,
+            }}
+          >
+            <Link
+              href="/book"
+              className="inline-block bg-[#E11D2E] hover:bg-red-700 active:scale-95 transition duration-300 px-8 py-4 rounded-xl text-white font-semibold shadow-lg"
+            >
+              Book Free Consultation
+            </Link>
+          </motion.div>
 
         </div>
 

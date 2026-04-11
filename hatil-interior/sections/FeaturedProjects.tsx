@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function FeaturedProjects() {
   const projects = [
@@ -50,34 +53,70 @@ export default function FeaturedProjects() {
         </h2>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <motion.div
+          className="grid md:grid-cols-3 gap-6"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.12,
+              },
+            },
+          }}
+        >
           {projects.map((p, i) => (
-            <Link
+
+            <motion.div
               key={i}
-              href={`/projects/${p.slug}`}
-              className="relative group overflow-hidden rounded-xl block"
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 50,
+                  scale: 0.97,
+                },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 0.6,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  },
+                },
+              }}
             >
-              {/* Image */}
-              <img
-                src={p.img}
-                className="w-full h-64 object-cover transition duration-500 group-hover:scale-110"
-              />
+              <Link
+                href={`/projects/${p.slug}`}
+                className="relative group overflow-hidden rounded-xl block"
+              >
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition" />
+                {/* Image */}
+                <img
+                  src={p.img}
+                  className="w-full h-64 object-cover transition duration-500 group-hover:scale-110"
+                />
 
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 p-4 text-white">
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                <p className="text-sm text-gray-200">{p.location}</p>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition duration-300" />
 
-                <span className="text-sm mt-2 inline-block text-[#ff4d4d] opacity-0 group-hover:opacity-100 transition">
-                  View Case Study →
-                </span>
-              </div>
-            </Link>
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-lg font-semibold">{p.title}</h3>
+                  <p className="text-sm text-gray-200">{p.location}</p>
+
+                  <span className="text-sm mt-2 inline-block text-[#ff4d4d] opacity-0 group-hover:opacity-100 transition">
+                    View Case Study →
+                  </span>
+                </div>
+
+              </Link>
+            </motion.div>
+
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

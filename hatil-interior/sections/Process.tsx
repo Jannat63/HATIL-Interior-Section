@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function Process() {
   const steps = [
     {
@@ -38,14 +42,54 @@ export default function Process() {
         <div className="hidden md:block absolute top-[150px] left-0 w-full h-[2px] bg-gray-200"></div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-5 gap-8 relative z-10">
+        <motion.div
+          className="grid md:grid-cols-5 gap-8 relative z-10"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
           {steps.map((step, i) => (
-            <div key={i} className="flex flex-col items-center group">
+            <motion.div
+              key={i}
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 40,
+                },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  },
+                },
+              }}
+              className="flex flex-col items-center group"
+            >
 
-              {/* Circle */}
-              <div className="w-14 h-14 rounded-full bg-[#E11D2E] text-white flex items-center justify-center font-semibold shadow-lg mb-4 group-hover:scale-110 transition">
+              {/* Circle (spring pop) */}
+              <motion.div
+                initial={{ scale: 0.7 }}
+                whileInView={{ scale: 1 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 12,
+                  delay: i * 0.1,
+                }}
+                className="w-14 h-14 rounded-full bg-[#E11D2E] text-white flex items-center justify-center font-semibold shadow-lg mb-4 group-hover:scale-110 transition"
+              >
                 {i + 1}
-              </div>
+              </motion.div>
 
               {/* Title */}
               <h3 className="font-semibold text-[#1F1F1F] mb-2">
@@ -57,9 +101,9 @@ export default function Process() {
                 {step.desc}
               </p>
 
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

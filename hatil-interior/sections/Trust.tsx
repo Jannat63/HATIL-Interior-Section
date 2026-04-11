@@ -1,71 +1,125 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+
+function useCountUp(end: number, duration = 1500, trigger: boolean) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!trigger) return;
+
+    let start = 0;
+    const increment = end / (duration / 16);
+
+    const counter = setInterval(() => {
+      start += increment;
+
+      if (start >= end) {
+        setCount(end);
+        clearInterval(counter);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(counter);
+  }, [trigger, end, duration]);
+
+  return count;
+}
+
 export default function Trust() {
-const logos = [
-  "https://cdn.simpleicons.org/google/000000",
-  "https://cdn.simpleicons.org/microsoft/000000",
-  "https://cdn.simpleicons.org/amazon/000000",
-  "https://cdn.simpleicons.org/netflix/000000",
-  "https://cdn.simpleicons.org/airbnb/000000",
-  "https://cdn.simpleicons.org/apple/000000",
-  "https://cdn.simpleicons.org/meta/000000",
-  "https://cdn.simpleicons.org/tesla/000000",
-  "https://cdn.simpleicons.org/spotify/000000",
-  "https://cdn.simpleicons.org/adobe/000000",
-  "https://cdn.simpleicons.org/samsung/000000",
-  "https://cdn.simpleicons.org/intel/000000",
-  "https://cdn.simpleicons.org/ibm/000000",
-  "https://cdn.simpleicons.org/oracle/000000",
-  "https://cdn.simpleicons.org/nvidia/000000",
-];
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const years = useCountUp(10, 1200, isInView);
+  const projects = useCountUp(500, 1500, isInView);
+
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-24 bg-[#F9F9F9]" ref={ref}>
       <div className="max-w-6xl mx-auto px-6 text-center">
 
-        {/* STATS */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="text-5xl font-bold text-[#1F1F1F]">10+</h2>
-            <p className="text-gray-600 mt-2 tracking-wide">
+        <motion.div
+          initial="hidden"
+          animate={isInView ? "show" : "hidden"}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+          className="grid md:grid-cols-2 gap-16"
+        >
+
+          {/* ITEM 1 */}
+          <motion.div
+            variants={{
+              hidden: {
+                opacity: 0,
+                y: 40,
+                scale: 0.95,
+                filter: "blur(6px)",
+              },
+              show: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                transition: {
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                },
+              },
+            }}
+            className="group"
+          >
+            <h2 className="text-6xl font-bold text-[#1F1F1F] tracking-tight">
+              {years}+
+            </h2>
+            <p className="text-gray-600 mt-3 tracking-wide">
               Years Experience
             </p>
-          </div>
 
-          <div>
-            <h2 className="text-5xl font-bold text-[#1F1F1F]">500+</h2>
-            <p className="text-gray-600 mt-2 tracking-wide">
+            {/* subtle hover */}
+            <div className="mt-3 h-[2px] w-0 bg-[#E11D2E] group-hover:w-12 transition-all duration-300 mx-auto"></div>
+          </motion.div>
+
+          {/* ITEM 2 */}
+          <motion.div
+            variants={{
+              hidden: {
+                opacity: 0,
+                y: 40,
+                scale: 0.95,
+                filter: "blur(6px)",
+              },
+              show: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                transition: {
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                },
+              },
+            }}
+            className="group"
+          >
+            <h2 className="text-6xl font-bold text-[#1F1F1F] tracking-tight">
+              {projects}+
+            </h2>
+            <p className="text-gray-600 mt-3 tracking-wide">
               Projects Completed
             </p>
-          </div>
-        </div>
 
-        {/* DIVIDER */}
-        <div className="w-16 h-[2px] bg-[#E11D2E] mx-auto mb-12"></div>
+            <div className="mt-3 h-[2px] w-0 bg-[#E11D2E] group-hover:w-12 transition-all duration-300 mx-auto"></div>
+          </motion.div>
 
-        {/* TITLE */}
-        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-10">
-          Trusted by Leading Brands
-        </h3>
-
-      </div>
-
-      {/* MARQUEE */}
-      <div className="relative overflow-hidden">
-
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
-
-        <div className="animate-marquee gap-20">
-
-          {[...logos, ...logos].map((logo, i) => (
-            <img
-              key={i}
-              src={logo}
-              alt="brand"
-              className="h-10 min-w-[120px] w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition duration-300"
-            />
-          ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

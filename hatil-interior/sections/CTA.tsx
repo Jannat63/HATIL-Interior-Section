@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
+
 export default function CTA() {
   return (
     <section className="py-28 bg-gradient-to-r from-[#f8f8f8] via-white to-[#f8f8f8] text-center relative overflow-hidden">
@@ -6,7 +10,16 @@ export default function CTA() {
       {/* Soft background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.03),transparent)]"></div>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.8,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+        className="relative z-10 max-w-3xl mx-auto px-6"
+      >
 
         {/* Title */}
         <h2 className="text-4xl md:text-5xl font-semibold text-[#1F1F1F] mb-6 leading-tight">
@@ -18,19 +31,30 @@ export default function CTA() {
           Book a consultation with HATIL’s interior experts and bring your vision to life.
         </p>
 
-        <Link
-  href="/book"
-  className="inline-block bg-[#E11D2E] text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 hover:bg-red-700 transition duration-300"
->
-  Book Your Consultation
-</Link>
+        {/* CTA BUTTON (delayed emphasis) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.2,
+            duration: 0.6,
+          }}
+        >
+          <Link
+            href="/book"
+            className="inline-block bg-[#E11D2E] text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 hover:bg-red-700 transition duration-300"
+          >
+            Book Your Consultation
+          </Link>
+        </motion.div>
 
         {/* Trust line */}
         <p className="text-xs text-gray-500 mt-6 tracking-wide">
           Free consultation • No obligation • Quick response
         </p>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
