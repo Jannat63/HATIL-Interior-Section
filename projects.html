@@ -85,291 +85,422 @@
     <div class="tag page-hero__label reveal">Our Portfolio</div>
     <h1 class="page-hero__title reveal delay-1">Interior Design Projects<br/>Across Bangladesh</h1>
     <p class="page-hero__sub reveal delay-2">
-      From intimate Dhanmondi apartments to sprawling Gulshan corporate headquarters — a complete look at HATIL Interior's completed work.
+      From intimate Dhanmondi apartments to Gulshan corporate headquarters — a selection of HATIL Interior's completed residential and commercial work.
     </p>
   </div>
 </section>
 
-<!-- PROJECTS GRID -->
+<style>
+  /* ── Projects page layout ──────────────────────────── */
+  .portfolio-wrap {
+    padding: clamp(3.5rem, 7vw, 6rem) 0;
+  }
+
+  /* Featured project — full width split */
+  .project-featured {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: 520px;
+    margin-bottom: 2px;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+  }
+  .project-featured__img {
+    position: relative;
+    overflow: hidden;
+  }
+  .project-featured__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .project-featured:hover .project-featured__img img { transform: scale(1.04); }
+  .project-featured__img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 70%, rgba(244,242,239,.3));
+  }
+
+  .project-featured__body {
+    background: var(--smoke);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--ash);
+    border-left: none;
+  }
+  .project-featured__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .project-featured__tag::before {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1.5px;
+    background: var(--red);
+  }
+  .project-featured__title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: .5rem;
+  }
+  .project-featured__location {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 1.4rem;
+  }
+  .project-featured__desc {
+    font-size: .88rem;
+    line-height: 1.85;
+    color: var(--silver);
+    margin-bottom: 2rem;
+    max-width: 420px;
+  }
+
+  /* Stats row inside featured */
+  .project-stats {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2rem;
+    border: 1px solid var(--ash);
+    background: var(--white);
+  }
+  .project-stat {
+    flex: 1;
+    padding: .9rem 1rem;
+    border-right: 1px solid var(--ash);
+    text-align: center;
+  }
+  .project-stat:last-child { border-right: none; }
+  .project-stat__val {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: .2rem;
+  }
+  .project-stat__val span { color: var(--red); }
+  .project-stat__label {
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* 3-column lower row */
+  .project-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .project-tile {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--white);
+    border: 1px solid var(--ash);
+    border-top: none;
+    overflow: hidden;
+    transition: box-shadow .35s, transform .35s;
+  }
+  .project-tile:hover {
+    box-shadow: 0 16px 48px rgba(0,0,0,.1);
+    transform: translateY(-4px);
+    z-index: 2;
+    position: relative;
+  }
+  .project-tile__img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .project-tile__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .project-tile:hover .project-tile__img img { transform: scale(1.06); }
+  .project-tile__badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: var(--red);
+    color: var(--white);
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .3rem .8rem;
+  }
+  .project-tile__body {
+    padding: 1.6rem 1.6rem 1.8rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-tile__location {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: .35rem;
+  }
+  .project-tile__title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: .7rem;
+  }
+  .project-tile__desc {
+    font-size: .8rem;
+    line-height: 1.75;
+    color: var(--silver);
+    margin-bottom: 1.2rem;
+    flex: 1;
+  }
+  .project-tile__stats {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ash);
+    font-size: .7rem;
+    color: var(--silver);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .project-tile__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--red);
+    transition: gap .2s;
+  }
+  .project-tile:hover .project-tile__cta { gap: .7rem; }
+
+  @media (max-width: 960px) {
+    .project-featured { grid-template-columns: 1fr; min-height: auto; }
+    .project-featured__img { min-height: 320px; }
+    .project-featured__body { border-left: 1px solid var(--ash); border-top: none; }
+    .project-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .project-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- PROJECTS -->
 <main>
   <div class="container">
-    <div class="projects-grid" itemscope itemtype="https://schema.org/ItemList">
+    <div class="portfolio-wrap" itemscope itemtype="https://schema.org/ItemList">
 
-      <!-- 1 -->
-      <a href="case-studies/bashundhara-residence.html" class="project-card reveal" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <!-- ── FEATURED PROJECT ─────────────────────────── -->
+      <a href="case-studies/bashundhara-residence.html"
+         class="project-featured reveal"
+         itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
+         aria-label="View Bashundhara Luxury Residence case study">
         <meta itemprop="position" content="1" />
-        <div class="project-card__img">
+
+        <div class="project-featured__img">
           <!--
             IMAGE: project-bashundhara-residence.jpg
-            TYPE: Luxury residential living room — HATIL sofa, center table, TV unit.
-            Dimensions: 800×600px.
+            TYPE: Wide shot of a luxury furnished living room — HATIL sofa, center table, TV unit, warm lighting.
+            Dimensions: 960×580px minimum.
           -->
-          <img src="assets/images/project-bashundhara-residence.jpg" alt="Luxury apartment interior design by HATIL – Bashundhara Dhaka" loading="lazy" width="800" height="600" itemprop="image" />
-          <div class="project-card__badge">Residential</div>
+          <img
+            src="assets/images/project-bashundhara-residence.jpg"
+            alt="Bashundhara luxury apartment interior design by HATIL – living room Dhaka"
+            loading="lazy" width="960" height="580"
+            itemprop="image"
+          />
+          <div class="project-featured__img-overlay"></div>
         </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Bashundhara, Dhaka</div>
-          <h2 class="project-card__name" itemprop="name">Bashundhara Luxury Residence</h2>
-          <div class="project-card__meta">
-            <span>📐 3,200 sq.ft</span>
-            <span>🛏 3 Bedrooms</span>
-            <span>⏱ 7 Weeks</span>
+
+        <div class="project-featured__body">
+          <div class="project-featured__tag">Residential · Featured Project</div>
+          <h2 class="project-featured__title" itemprop="name">Bashundhara<br/>Luxury Residence</h2>
+          <div class="project-featured__location">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:.3rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+            Bashundhara R/A, Dhaka
           </div>
-          <span class="project-card__arrow">View Case Study →</span>
+          <p class="project-featured__desc">
+            A complete 3,200 sq.ft residential interior for a family of four — covering living room, dining, modular kitchen, master bedroom, and two children's rooms with SmartFit study units. Delivered in 7 weeks with zero defects at handover.
+          </p>
+
+          <div class="project-stats">
+            <div class="project-stat">
+              <div class="project-stat__val">3,200<span> ft²</span></div>
+              <div class="project-stat__label">Total Area</div>
+            </div>
+            <div class="project-stat">
+              <div class="project-stat__val">6</div>
+              <div class="project-stat__label">Rooms</div>
+            </div>
+            <div class="project-stat">
+              <div class="project-stat__val">7<span> wks</span></div>
+              <div class="project-stat__label">Timeline</div>
+            </div>
+            <div class="project-stat">
+              <div class="project-stat__val">5<span>/5</span></div>
+              <div class="project-stat__label">Client Rating</div>
+            </div>
+          </div>
+
+          <span class="btn-primary" style="align-self:flex-start;">
+            View Full Case Study
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </span>
         </div>
       </a>
 
-      <!-- 2 -->
-      <a href="case-studies/gulshan-corporate-hq.html" class="project-card reveal delay-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <meta itemprop="position" content="2" />
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-gulshan-office.jpg
-            TYPE: Modern corporate office — executive chairs, open workstations, glass partitions.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-gulshan-office.jpg" alt="Corporate office interior design by HATIL – Gulshan Dhaka" loading="lazy" width="800" height="600" itemprop="image" />
-          <div class="project-card__badge">Corporate</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Gulshan-2, Dhaka</div>
-          <h2 class="project-card__name" itemprop="name">Gulshan Corporate Headquarters</h2>
-          <div class="project-card__meta">
-            <span>📐 5,000 sq.ft</span>
-            <span>🪑 50 Workstations</span>
-            <span>⏱ 10 Weeks</span>
-          </div>
-          <span class="project-card__arrow">View Case Study →</span>
-        </div>
-      </a>
+      <!-- ── 3-TILE ROW ────────────────────────────────── -->
+      <div class="project-row">
 
-      <!-- 3 -->
-      <a href="case-studies/banani-restaurant.html" class="project-card reveal delay-2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <meta itemprop="position" content="3" />
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-banani-restaurant.jpg
-            TYPE: Fine dining restaurant interior — warm lighting, wooden furniture, elegant setting.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-banani-restaurant.jpg" alt="Restaurant interior design by HATIL – Banani Dhaka Bangladesh" loading="lazy" width="800" height="600" itemprop="image" />
-          <div class="project-card__badge">Commercial</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Banani, Dhaka</div>
-          <h2 class="project-card__name" itemprop="name">Banani Fine Dining Restaurant</h2>
-          <div class="project-card__meta">
-            <span>📐 2,400 sq.ft</span>
-            <span>🍽 80 Covers</span>
-            <span>⏱ 8 Weeks</span>
+        <!-- Gulshan Corporate HQ -->
+        <a href="case-studies/gulshan-corporate-hq.html"
+           class="project-tile reveal"
+           itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
+           aria-label="View Gulshan Corporate HQ case study">
+          <meta itemprop="position" content="2" />
+          <div class="project-tile__img">
+            <!--
+              IMAGE: project-gulshan-office.jpg
+              TYPE: Modern corporate office — HATIL workstations, glass partitions, executive area.
+              Dimensions: 800×600px.
+            -->
+            <img
+              src="assets/images/project-gulshan-office.jpg"
+              alt="Corporate office interior design by HATIL – Gulshan-2 Dhaka Bangladesh"
+              loading="lazy" width="800" height="600"
+              itemprop="image"
+            />
+            <div class="project-tile__badge">Corporate</div>
           </div>
-          <span class="project-card__arrow">View Case Study →</span>
-        </div>
-      </a>
+          <div class="project-tile__body">
+            <div class="project-tile__location">Gulshan-2, Dhaka</div>
+            <h2 class="project-tile__title" itemprop="name">Gulshan Corporate Headquarters</h2>
+            <p class="project-tile__desc">
+              A 5,000 sq.ft technology firm HQ — 50 ergonomic workstations, a custom 20-seat boardroom, four executive suites, and a brand-integrated reception area. Completed in 10 weeks.
+            </p>
+            <div class="project-tile__stats">
+              <span>📐 5,000 sq.ft</span>
+              <span>🪑 50 Workstations</span>
+              <span>⏱ 10 Weeks</span>
+            </div>
+            <span class="project-tile__cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
+          </div>
+        </a>
 
-      <!-- 4 -->
-      <a href="case-studies/dhanmondi-apartment.html" class="project-card reveal" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <meta itemprop="position" content="4" />
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-dhanmondi-apartment.jpg
-            TYPE: Modern family apartment interior — living + dining in open plan layout.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-dhanmondi-apartment.jpg" alt="Family apartment interior design by HATIL – Dhanmondi Dhaka" loading="lazy" width="800" height="600" itemprop="image" />
-          <div class="project-card__badge">Residential</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Dhanmondi, Dhaka</div>
-          <h2 class="project-card__name" itemprop="name">Dhanmondi Family Apartment</h2>
-          <div class="project-card__meta">
-            <span>📐 1,800 sq.ft</span>
-            <span>🛏 2 Bedrooms</span>
-            <span>⏱ 5 Weeks</span>
+        <!-- Banani Restaurant -->
+        <a href="case-studies/banani-restaurant.html"
+           class="project-tile reveal delay-1"
+           itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
+           aria-label="View Banani Fine Dining case study">
+          <meta itemprop="position" content="3" />
+          <div class="project-tile__img">
+            <!--
+              IMAGE: project-banani-restaurant.jpg
+              TYPE: Fine dining restaurant interior — warm pendant lights, wooden HATIL tables and chairs.
+              Dimensions: 800×600px.
+            -->
+            <img
+              src="assets/images/project-banani-restaurant.jpg"
+              alt="Fine dining restaurant interior design by HATIL – Banani Dhaka Bangladesh"
+              loading="lazy" width="800" height="600"
+              itemprop="image"
+            />
+            <div class="project-tile__badge">Commercial</div>
           </div>
-          <span class="project-card__arrow">View Case Study →</span>
-        </div>
-      </a>
+          <div class="project-tile__body">
+            <div class="project-tile__location">Banani, Dhaka</div>
+            <h2 class="project-tile__title" itemprop="name">Banani Fine Dining Restaurant</h2>
+            <p class="project-tile__desc">
+              A 2,400 sq.ft fine dining space seating 80 covers — custom walnut dining tables, a 10-seat private alcove, solid wood bar counter, and a ceiling-height feature wall. Fully booked within 2 weeks of opening.
+            </p>
+            <div class="project-tile__stats">
+              <span>📐 2,400 sq.ft</span>
+              <span>🍽 80 Covers</span>
+              <span>⏱ 8 Weeks</span>
+            </div>
+            <span class="project-tile__cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
+          </div>
+        </a>
 
-      <!-- 5 -->
-      <article class="project-card reveal delay-1">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-uttara-office.jpg
-            TYPE: Mid-size professional office space — reception area or meeting room with HATIL furniture.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-uttara-office.jpg" alt="Office interior design Uttara Dhaka – HATIL furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Office</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Uttara, Dhaka</div>
-          <h2 class="project-card__name">Uttara Professional Office</h2>
-          <div class="project-card__meta">
-            <span>📐 2,200 sq.ft</span>
-            <span>🪑 30 Workstations</span>
-            <span>⏱ 6 Weeks</span>
+        <!-- Dhanmondi Apartment -->
+        <a href="case-studies/dhanmondi-apartment.html"
+           class="project-tile reveal delay-2"
+           itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
+           aria-label="View Dhanmondi Family Apartment case study">
+          <meta itemprop="position" content="4" />
+          <div class="project-tile__img">
+            <!--
+              IMAGE: project-dhanmondi-apartment.jpg
+              TYPE: Modern family apartment — open-plan living + dining, HATIL L-shaped sofa, light tones.
+              Dimensions: 800×600px.
+            -->
+            <img
+              src="assets/images/project-dhanmondi-apartment.jpg"
+              alt="Family apartment interior design by HATIL – Dhanmondi Dhaka Bangladesh"
+              loading="lazy" width="800" height="600"
+              itemprop="image"
+            />
+            <div class="project-tile__badge">Residential</div>
           </div>
-        </div>
-      </article>
+          <div class="project-tile__body">
+            <div class="project-tile__location">Dhanmondi, Dhaka</div>
+            <h2 class="project-tile__title" itemprop="name">Dhanmondi Family Apartment</h2>
+            <p class="project-tile__desc">
+              A budget-smart 1,800 sq.ft family home — living room, 2 bedrooms with SmartFit study units, compact dining set, and an L-shape modular kitchen. Delivered in 5 weeks, within agreed budget, zero overrun.
+            </p>
+            <div class="project-tile__stats">
+              <span>📐 1,800 sq.ft</span>
+              <span>🛏 2 Bedrooms</span>
+              <span>⏱ 5 Weeks</span>
+            </div>
+            <span class="project-tile__cta">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
+          </div>
+        </a>
 
-      <!-- 6 -->
-      <article class="project-card reveal delay-2">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-sylhet-villa.jpg
-            TYPE: Villa or duplex interior — spacious living room with high ceilings, premium finish.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-sylhet-villa.jpg" alt="Villa interior design Sylhet – HATIL luxury furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Villa</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Sylhet</div>
-          <h2 class="project-card__name">Sylhet Luxury Villa</h2>
-          <div class="project-card__meta">
-            <span>📐 4,500 sq.ft</span>
-            <span>🛏 4 Bedrooms</span>
-            <span>⏱ 12 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 7 -->
-      <article class="project-card reveal">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-chittagong-hotel.jpg
-            TYPE: Hotel lobby or hotel room interior with HATIL hospitality furniture.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-chittagong-hotel.jpg" alt="Hotel interior design Chittagong – HATIL hospitality furniture Bangladesh" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Hospitality</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Chittagong</div>
-          <h2 class="project-card__name">Chittagong Boutique Hotel</h2>
-          <div class="project-card__meta">
-            <span>📐 8,000 sq.ft</span>
-            <span>🏨 24 Rooms</span>
-            <span>⏱ 16 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 8 -->
-      <article class="project-card reveal delay-1">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-mirpur-bedroom.jpg
-            TYPE: Beautifully furnished master bedroom — HATIL bed, wardrobe, dressing area.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-mirpur-bedroom.jpg" alt="Bedroom interior design Mirpur Dhaka – HATIL bedroom furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Bedroom</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Mirpur, Dhaka</div>
-          <h2 class="project-card__name">Mirpur Apartment Bedroom Suite</h2>
-          <div class="project-card__meta">
-            <span>📐 480 sq.ft</span>
-            <span>🛏 Master Suite</span>
-            <span>⏱ 3 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 9 -->
-      <article class="project-card reveal delay-2">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-modular-kitchen.jpg
-            TYPE: Completed HATIL modular kitchen — cabinets, counter, organized and bright.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-modular-kitchen.jpg" alt="Modular kitchen interior design Bangladesh – HATIL kitchen cabinet" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Kitchen</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Banani, Dhaka</div>
-          <h2 class="project-card__name">Banani Modular Kitchen</h2>
-          <div class="project-card__meta">
-            <span>📐 320 sq.ft</span>
-            <span>🍳 Full Kitchen</span>
-            <span>⏱ 4 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 10 -->
-      <article class="project-card reveal">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-rajshahi-school.jpg
-            TYPE: Institutional interior — school library, teacher's lounge, or admin office with HATIL furniture.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-rajshahi-school.jpg" alt="Institutional interior design Bangladesh – HATIL school furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Institutional</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Rajshahi</div>
-          <h2 class="project-card__name">Rajshahi School Campus</h2>
-          <div class="project-card__meta">
-            <span>📐 12,000 sq.ft</span>
-            <span>🏫 Multi-room</span>
-            <span>⏱ 18 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 11 -->
-      <article class="project-card reveal delay-1">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-kids-room.jpg
-            TYPE: Colourful, fun kid's room interior — HATIL kids bed, study table, storage.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-kids-room.jpg" alt="Kids room interior design Bangladesh – HATIL children's furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Kid's Room</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Gulshan, Dhaka</div>
-          <h2 class="project-card__name">Gulshan Kid's Bedroom</h2>
-          <div class="project-card__meta">
-            <span>📐 280 sq.ft</span>
-            <span>👧 Ages 5–12</span>
-            <span>⏱ 2 Weeks</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 12 -->
-      <article class="project-card reveal delay-2">
-        <div class="project-card__img">
-          <!--
-            IMAGE: project-home-office.jpg
-            TYPE: Productive home office setup — desk, shelves, ergonomic chair, clean layout.
-            Dimensions: 800×600px.
-          -->
-          <img src="assets/images/project-home-office.jpg" alt="Home office interior design Bangladesh – HATIL SmartFit furniture" loading="lazy" width="800" height="600" />
-          <div class="project-card__badge">Home Office</div>
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__location">Dhanmondi, Dhaka</div>
-          <h2 class="project-card__name">Dhanmondi Home Office</h2>
-          <div class="project-card__meta">
-            <span>📐 220 sq.ft</span>
-            <span>💼 Work From Home</span>
-            <span>⏱ 2 Weeks</span>
-          </div>
-        </div>
-      </article>
+      </div>
 
     </div>
   </div>
 </main>
+
 
 <!-- CTA STRIP -->
 <section class="cta-strip" aria-label="Book Interior Consultation">

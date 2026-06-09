@@ -1584,61 +1584,313 @@
           The more you share, the better we prepare. All fields marked * are required.
         </p>
 
-        <form action="/interior/book" method="POST" id="consultationForm" aria-label="Interior design consultation form">
+        <!-- ICON CARDS CSS -->
+        <style>
+          .pt-label {
+            font-size:.68rem;font-weight:700;letter-spacing:.1em;
+            text-transform:uppercase;color:var(--ink);
+            margin-bottom:.9rem;display:block;
+          }
+          .pt-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:.7rem;
+            margin-bottom:1.6rem;
+          }
+          .pt-card {
+            position:relative;
+            cursor:pointer;
+          }
+          .pt-card input[type="radio"] {
+            position:absolute;opacity:0;width:0;height:0;
+          }
+          .pt-card label {
+            display:flex;flex-direction:column;align-items:center;
+            justify-content:center;gap:.55rem;
+            padding:1.1rem .6rem .9rem;
+            border:1.5px solid var(--ash);
+            background:var(--white);
+            cursor:pointer;
+            text-align:center;
+            transition:all .25s ease;
+          }
+          .pt-card label svg {
+            width:28px;height:28px;
+            stroke:var(--silver);
+            transition:stroke .25s, transform .25s;
+          }
+          .pt-card__name {
+            font-size:.72rem;font-weight:600;
+            color:var(--silver);
+            letter-spacing:.04em;
+            transition:color .25s;
+            line-height:1.3;
+          }
+          /* hover */
+          .pt-card label:hover {
+            border-color:var(--ink);
+            background:var(--smoke);
+          }
+          .pt-card label:hover svg { stroke:var(--ink); }
+          .pt-card label:hover .pt-card__name { color:var(--ink); }
+          /* selected */
+          .pt-card input[type="radio"]:checked + label {
+            border-color:var(--red);
+            background:#fff5f5;
+          }
+          .pt-card input[type="radio"]:checked + label svg {
+            stroke:var(--red);
+            transform:scale(1.12);
+          }
+          .pt-card input[type="radio"]:checked + label .pt-card__name {
+            color:var(--red);
+          }
+          /* tick badge */
+          .pt-card input[type="radio"]:checked + label::after {
+            content:'✓';
+            position:absolute;
+            top:.4rem;right:.5rem;
+            font-size:.62rem;font-weight:700;
+            color:var(--red);
+          }
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="client-name">Full Name *</label>
-              <input type="text" id="client-name" name="name" placeholder="Your full name" required autocomplete="name" />
+          /* Floating input effect */
+          .field-wrap {
+            position:relative;
+            margin-bottom:1.1rem;
+          }
+          .field-wrap input,
+          .field-wrap textarea {
+            width:100%;
+            padding:.85rem 1rem .85rem 1rem;
+            border:1.5px solid var(--ash);
+            background:var(--white);
+            font-family:var(--sans);
+            font-size:.88rem;
+            color:var(--ink);
+            outline:none;
+            transition:border-color .2s;
+            display:block;
+          }
+          .field-wrap textarea {
+            resize:vertical;
+            min-height:100px;
+          }
+          .field-wrap input:focus,
+          .field-wrap textarea:focus {
+            border-color:var(--red);
+          }
+          .field-wrap input:focus + .field-line,
+          .field-wrap textarea:focus + .field-line {
+            transform:scaleX(1);
+          }
+          .field-line {
+            position:absolute;
+            bottom:0;left:0;right:0;
+            height:2px;
+            background:var(--red);
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .3s ease;
+          }
+          .field-label {
+            display:block;
+            font-size:.68rem;font-weight:700;
+            letter-spacing:.1em;text-transform:uppercase;
+            color:var(--ink);margin-bottom:.45rem;
+          }
+          .field-row {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:.8rem;
+          }
+          @media(max-width:600px) {
+            .pt-grid { grid-template-columns:repeat(2,1fr); }
+            .field-row { grid-template-columns:1fr; }
+          }
+
+          /* Submit button pulse */
+          .form__submit {
+            position:relative;
+            overflow:hidden;
+          }
+          .form__submit::after {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(255,255,255,.15);
+            transform:translateX(-100%);
+            transition:transform .4s ease;
+          }
+          .form__submit:hover::after {
+            transform:translateX(0);
+          }
+
+          /* Error shake */
+          @keyframes shake {
+            0%,100%{transform:translateX(0)}
+            20%{transform:translateX(-6px)}
+            40%{transform:translateX(6px)}
+            60%{transform:translateX(-4px)}
+            80%{transform:translateX(4px)}
+          }
+          .field-error input,
+          .field-error textarea {
+            border-color:#e11d2e !important;
+          }
+          .pt-grid.type-error .pt-card label {
+            border-color:#fca5a5;
+          }
+        </style>
+
+        <form action="/interior/book" method="POST" id="consultationForm" aria-label="Interior design consultation form" novalidate>
+
+          <!-- STEP 1: Contact -->
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;">
+            <div style="width:24px;height:24px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:.65rem;font-weight:700;color:#fff;">01</span>
             </div>
-            <div class="form-group">
-              <label for="client-phone">Phone Number *</label>
-              <input type="tel" id="client-phone" name="phone" placeholder="+880 1XXXXXXXXX" required autocomplete="tel" />
+            <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);">Your Contact Details</span>
+            <div style="flex:1;height:1px;background:var(--ash);"></div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-wrap" id="wrap-name">
+              <label class="field-label" for="client-name">Full Name *</label>
+              <input type="text" id="client-name" name="name" placeholder="Your full name" autocomplete="name" />
+              <div class="field-line"></div>
+            </div>
+            <div class="field-wrap" id="wrap-phone">
+              <label class="field-label" for="client-phone">Phone Number *</label>
+              <input type="tel" id="client-phone" name="phone" placeholder="+880 1XXXXXXXXX" autocomplete="tel" />
+              <div class="field-line"></div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="client-email">Email Address</label>
-            <input type="email" id="client-email" name="email" placeholder="your@email.com" autocomplete="email" />
-          </div>
-
-          <div class="form-group">
-            <label for="client-location">Project Location *</label>
-            <input type="text" id="client-location" name="location" placeholder="e.g. Gulshan-2, Dhaka" required />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="project-type">Project Type *</label>
-              <select id="project-type" name="project_type" required>
-                <option value="" disabled selected>Select type</option>
-                <option>Residential Apartment</option>
-                <option>Villa / Duplex</option>
-                <option>Office Space</option>
-                <option>Commercial / Retail</option>
-                <option>Hotel / Restaurant</option>
-                <option>Institutional</option>
-              </select>
+          <div class="field-row">
+            <div class="field-wrap">
+              <label class="field-label" for="client-email">Email Address</label>
+              <input type="email" id="client-email" name="email" placeholder="your@email.com" autocomplete="email" />
+              <div class="field-line"></div>
             </div>
-            <div class="form-group">
-              <label for="budget-range">Estimated Budget</label>
-              <select id="budget-range" name="budget">
-                <option value="" disabled selected>Select budget</option>
-                <option>Under ৳5 Lakh</option>
-                <option>৳5 – ৳10 Lakh</option>
-                <option>৳10 – ৳25 Lakh</option>
-                <option>৳25 – ৳50 Lakh</option>
-                <option>৳50 Lakh+</option>
-              </select>
+            <div class="field-wrap" id="wrap-location">
+              <label class="field-label" for="client-location">Project Location *</label>
+              <input type="text" id="client-location" name="location" placeholder="e.g. Gulshan-2, Dhaka" />
+              <div class="field-line"></div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="project-details">Project Details</label>
-            <textarea id="project-details" name="details" placeholder="Number of rooms, current situation, specific requirements, timeline..."></textarea>
+          <!-- STEP 2: Project Type -->
+          <div style="display:flex;align-items:center;gap:.7rem;margin:1.8rem 0 1.2rem;">
+            <div style="width:24px;height:24px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:.65rem;font-weight:700;color:#fff;">02</span>
+            </div>
+            <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);">What Are We Designing?</span>
+            <div style="flex:1;height:1px;background:var(--ash);"></div>
           </div>
 
-          <p style="font-size:.72rem;color:var(--silver);margin-bottom:1rem;">
+          <input type="hidden" id="project-type-value" name="project_type" />
+          <div class="pt-grid" id="pt-grid" role="radiogroup" aria-label="Project type">
+
+            <!-- Apartment -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-apartment" value="Residential Apartment" />
+              <label for="pt-apartment">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span class="pt-card__name">Apartment</span>
+              </label>
+            </div>
+
+            <!-- Villa -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-villa" value="Villa / Duplex" />
+              <label for="pt-villa">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4z"/>
+                </svg>
+                <span class="pt-card__name">Villa / Duplex</span>
+              </label>
+            </div>
+
+            <!-- Office -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-office" value="Office Space" />
+              <label for="pt-office">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                <span class="pt-card__name">Office</span>
+              </label>
+            </div>
+
+            <!-- Restaurant -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-restaurant" value="Restaurant / Café" />
+              <label for="pt-restaurant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                  <line x1="6" y1="1" x2="6" y2="4"/>
+                  <line x1="10" y1="1" x2="10" y2="4"/>
+                  <line x1="14" y1="1" x2="14" y2="4"/>
+                </svg>
+                <span class="pt-card__name">Restaurant</span>
+              </label>
+            </div>
+
+            <!-- Hotel -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-hotel" value="Hotel / Hospitality" />
+              <label for="pt-hotel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                  <path d="M1 21h22"/>
+                  <path d="M9 7h1m-1 4h1m4-4h1m-1 4h1"/>
+                  <path d="M9 21v-4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4"/>
+                </svg>
+                <span class="pt-card__name">Hotel</span>
+              </label>
+            </div>
+
+            <!-- Institutional -->
+            <div class="pt-card">
+              <input type="radio" name="pt" id="pt-institutional" value="Institutional" />
+              <label for="pt-institutional">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="2" x2="12" y2="6"/>
+                  <path d="M3 21h18"/>
+                  <path d="M5 21V9l7-4 7 4v12"/>
+                  <rect x="9" y="14" width="6" height="7"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                </svg>
+                <span class="pt-card__name">Institutional</span>
+              </label>
+            </div>
+
+          </div>
+          <p id="pt-error" style="display:none;font-size:.72rem;color:var(--red);margin:-1rem 0 1rem;">Please select a project type.</p>
+
+          <!-- STEP 3: Details -->
+          <div style="display:flex;align-items:center;gap:.7rem;margin:1.8rem 0 1.2rem;">
+            <div style="width:24px;height:24px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:.65rem;font-weight:700;color:#fff;">03</span>
+            </div>
+            <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);">Tell Us More</span>
+            <div style="flex:1;height:1px;background:var(--ash);"></div>
+          </div>
+
+          <div class="field-wrap">
+            <label class="field-label" for="project-details">Project Details</label>
+            <textarea id="project-details" name="details" placeholder="Number of rooms, current situation, specific requirements, ideal timeline..."></textarea>
+            <div class="field-line"></div>
+          </div>
+
+          <p style="font-size:.72rem;color:var(--silver);margin-bottom:1.2rem;">
             By submitting, you agree to our <a href="https://hatil.com/privacy-policy" target="_blank" rel="noopener noreferrer" style="color:var(--red);">Privacy Policy</a>. We will never share your information.
           </p>
 
@@ -1867,46 +2119,74 @@
     });
   });
 
-  // ─── FORM SUBMIT ───────────────────────────────────────
-  const form = document.querySelector('form[action="/interior/book"]');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('.form__submit');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = '✓ Consultation Request Sent!';
-        btn.style.background = '#16a34a';
-        setTimeout(() => {
-          btn.textContent = 'Book Free Consultation →';
-          btn.style.background = '';
-          btn.disabled = false;
-          form.reset();
-        }, 4000);
-      }, 1200);
+  // ─── ICON CARD PROJECT TYPE ──────────────────────────────
+  document.querySelectorAll('input[name="pt"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      document.getElementById('project-type-value').value = this.value;
+      document.getElementById('pt-error').style.display = 'none';
+      document.getElementById('pt-grid').classList.remove('type-error');
     });
-  }
-</script>
+  });
 
-<script>
-  const form = document.getElementById('consultationForm');
-  if (form) {
-    form.addEventListener('submit', function(e) {
+  // ─── FORM SUBMIT WITH VALIDATION ─────────────────────────
+  const consultForm = document.getElementById('consultationForm');
+  if (consultForm) {
+    consultForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      let valid = true;
+
+      // Required text fields
+      [['client-name','wrap-name'],['client-phone','wrap-phone'],['client-location','wrap-location']].forEach(([id, wid]) => {
+        const el = document.getElementById(id);
+        const wr = document.getElementById(wid);
+        if (!el || !el.value.trim()) {
+          if (wr) { wr.classList.add('field-error'); wr.style.animation='shake .35s ease'; setTimeout(()=>{ wr.style.animation=''; },400); }
+          valid = false;
+        } else {
+          if (wr) wr.classList.remove('field-error');
+        }
+      });
+
+      // Project type
+      const ptVal = document.getElementById('project-type-value').value;
+      if (!ptVal) {
+        document.getElementById('pt-error').style.display = 'block';
+        document.getElementById('pt-grid').classList.add('type-error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
       const btn = document.getElementById('formSubmit');
-      btn.textContent = 'Sending...';
+      btn.textContent = 'Sending your request...';
       btn.disabled = true;
+
       setTimeout(() => {
-        btn.textContent = '✓ Consultation Request Sent!';
-        btn.style.background = '#16a34a';
+        consultForm.style.opacity = '0';
+        consultForm.style.transform = 'translateY(10px)';
+        consultForm.style.transition = 'opacity .4s, transform .4s';
         setTimeout(() => {
-          btn.textContent = 'Book Free Consultation →';
-          btn.style.background = '';
-          btn.disabled = false;
-          form.reset();
-        }, 4000);
-      }, 1200);
+          consultForm.innerHTML = `
+            <div style="text-align:center;padding:3rem 1rem;">
+              <div style="width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:500;color:var(--ink);margin-bottom:.6rem;">Request Received!</h3>
+              <p style="font-size:.88rem;line-height:1.7;color:var(--silver);max-width:360px;margin:0 auto 2rem;">A HATIL interior consultant will contact you within 24 hours to schedule your free site visit and consultation.</p>
+              <a href="projects.html" class="btn-outline">Browse Our Projects</a>
+            </div>`;
+          consultForm.style.opacity = '1';
+          consultForm.style.transform = 'none';
+        }, 400);
+      }, 1300);
+    });
+
+    // Live clear errors on input
+    consultForm.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', function() {
+        const wrap = this.closest('.field-wrap');
+        if (wrap) wrap.classList.remove('field-error');
+      });
     });
   }
 </script>
