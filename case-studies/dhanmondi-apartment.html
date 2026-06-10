@@ -40,6 +40,124 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* Challenge points box */
+    .challenge-box {
+      background: var(--smoke);
+      border: 1px solid var(--ash);
+      border-top: 3px solid var(--red);
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .challenge-box__title {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .challenge-box__title::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 1.5px;
+      background: var(--red);
+    }
+    .challenge-box__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .9rem;
+      padding: .9rem 0;
+      border-bottom: 1px solid var(--ash);
+      font-size: .84rem;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+    .challenge-box__item:last-child { border-bottom: none; }
+    .challenge-box__num {
+      min-width: 24px;
+      height: 24px;
+      background: var(--red);
+      color: #fff;
+      font-size: .6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    /* Gallery grid replacement */
+    .project-scope {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 2rem;
+    }
+    .scope-card {
+      background: var(--smoke);
+      border: 1px solid var(--ash);
+      padding: 1.4rem 1.5rem;
+      position: relative;
+    }
+    .scope-card--featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: var(--ink);
+      padding: 0;
+    }
+    .scope-card--featured img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 280px;
+      display: block;
+    }
+    .scope-card--featured .scope-card__inner {
+      padding: 2rem 2rem 2rem 0;
+    }
+    .scope-card__room {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .4rem;
+    }
+    .scope-card__desc {
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--silver);
+    }
+    .scope-card--featured .scope-card__room { color: var(--red); }
+    .scope-card--featured .scope-card__desc { color: rgba(255,255,255,.55); }
+    .scope-card__heading {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+
+    @media (max-width: 700px) {
+      .project-scope { grid-template-columns: 1fr; }
+      .scope-card--featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .scope-card--featured .scope-card__inner { padding: 1.5rem; }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -196,20 +314,20 @@
         </div>
       </div>
       <div class="reveal-right">
-        <!--
-          IMAGE: cs-dhanmondi-challenge.jpg
-          TYPE: Empty apartment or initial planning photo — showing the raw space before furniture.
-          Alternatively: a photo of the family (or a representative couple) in consultation with a HATIL designer.
-          Dimensions: 700×520px.
-        -->
-        <div style="aspect-ratio:4/3; overflow:hidden;">
-          <img
-            src="../assets/images/cs-dhanmondi-challenge.jpg"
-            alt="Empty Dhanmondi apartment before HATIL interior design – consultation phase"
-            loading="lazy"
-            width="700"
-            height="520"
-          />
+        <div class="challenge-box">
+          <div class="challenge-box__title">Key Challenges</div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">01</div>
+          <span>Furnish 1,800 sq.ft for a family of four within a ৳12–18 lakh budget — no compromise on quality</span>
+        </div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">02</div>
+          <span>Prioritise the most-used rooms while keeping the full home cohesive and polished</span>
+        </div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">03</div>
+          <span>Child-safe furniture throughout — rounded edges, soft-close hardware, durable daily-use finishes</span>
+        </div>
         </div>
       </div>
     </div>
@@ -237,87 +355,45 @@
       </div>
     </div>
 
-    <!-- Gallery -->
+    <!-- Project Scope -->
     <div class="cs-section reveal">
       <div class="cs-section__tag">Project Gallery</div>
-      <h2 class="cs-section__title">The Finished Home</h2>
+      <h2 class="cs-section__title">Rooms & Solutions</h2>
 
-      <div class="cs-gallery cs-gallery--3" style="margin-top:2rem;">
-        <div class="cs-gallery__item" style="aspect-ratio:auto; min-height:500px;">
-          <!--
-            IMAGE: cs-dhanmondi-gallery-1.jpg
-            TYPE: Living room — L-shaped sofa, centre table, TV unit. Warm, bright, family feel.
-            Dimensions: 900×500px.
-          -->
-          <img
-            src="../assets/images/cs-dhanmondi-gallery-1.jpg"
-            alt="Dhanmondi apartment living room interior – HATIL L-shaped sofa and TV unit"
-            loading="lazy"
-            width="900"
-            height="500"
-          />
+      <div class="project-scope">
+        <div class="scope-card scope-card--featured">
+          <img src="../assets/images/project-dhanmondi-apartment.jpg" alt="Dhanmondi family apartment interior design by HATIL" loading="lazy" />
+          <div class="scope-card__inner">
+            <div class="scope-card__room">Living Room</div>
+            <div class="scope-card__heading">Completed Project</div>
+            <div class="scope-card__desc">HATIL L-shaped fabric sofa in neutral tone, low-profile center table, wall-mounted TV unit in light finish</div>
+          </div>
         </div>
-        <div class="cs-gallery__item" style="aspect-ratio:4/3;">
-          <!--
-            IMAGE: cs-dhanmondi-gallery-2.jpg
-            TYPE: Children's bedroom — SmartFit bunk bed with study desks and shelving.
-            Dimensions: 600×450px.
-          -->
-          <img
-            src="../assets/images/cs-dhanmondi-gallery-2.jpg"
-            alt="Children's bedroom with HATIL SmartFit bunk bed and study desk – Dhanmondi"
-            loading="lazy"
-            width="600"
-            height="450"
-          />
-        </div>
-        <div class="cs-gallery__item" style="aspect-ratio:4/3;">
-          <!--
-            IMAGE: cs-dhanmondi-gallery-3.jpg
-            TYPE: Dining area — 4-seat HATIL dining set, compact and neat.
-            Dimensions: 600×450px.
-          -->
-          <img
-            src="../assets/images/cs-dhanmondi-gallery-3.jpg"
-            alt="Dining area interior – HATIL 4-seat dining set Dhanmondi Dhaka"
-            loading="lazy"
-            width="600"
-            height="450"
-          />
-        </div>
-      </div>
 
-      <div class="cs-gallery cs-gallery--2" style="margin-top:6px;">
-        <div class="cs-gallery__item" style="aspect-ratio:16/9;">
-          <!--
-            IMAGE: cs-dhanmondi-gallery-4.jpg
-            TYPE: Master bedroom — HATIL bed with wardrobe and dressing table. Calm, neutral tones.
-            Dimensions: 800×450px.
-          -->
-          <img
-            src="../assets/images/cs-dhanmondi-gallery-4.jpg"
-            alt="Master bedroom interior – HATIL bed, wardrobe and dressing table Dhanmondi"
-            loading="lazy"
-            width="800"
-            height="450"
-          />
+        <div class="scope-card">
+          <div class="scope-card__room">Children's Bedroom</div>
+          <div class="scope-card__desc">SmartFit bunk bed with integrated study desks for both children — rounded edges, soft-close drawers</div>
         </div>
-        <div class="cs-gallery__item" style="aspect-ratio:16/9;">
-          <!--
-            IMAGE: cs-dhanmondi-gallery-5.jpg
-            TYPE: Modular kitchen — L-shape layout, clean melamine cabinets, countertop detail.
-            Dimensions: 800×450px.
-          -->
-          <img
-            src="../assets/images/cs-dhanmondi-gallery-5.jpg"
-            alt="Modular kitchen interior – HATIL L-shape kitchen cabinet Dhanmondi apartment"
-            loading="lazy"
-            width="800"
-            height="450"
-          />
+        <div class="scope-card">
+          <div class="scope-card__room">Master Bedroom</div>
+          <div class="scope-card__desc">Queen bed with under-bed storage, 3-door wardrobe with soft-close hardware, compact dressing table</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card__room">Dining Area</div>
+          <div class="scope-card__desc">Compact 4-seat HATIL dining set — extendable top for when guests arrive</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card__room">Modular Kitchen</div>
+          <div class="scope-card__desc">L-shape layout with moisture-resistant melamine cabinets, maximised counter and storage space</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card__room">Budget & Value</div>
+          <div class="scope-card__desc">Priority-based allocation — premium spend on living room and children's room, smart choices elsewhere</div>
         </div>
       </div>
     </div>
+
+
 
     <!-- Results -->
     <div class="cs-section reveal">

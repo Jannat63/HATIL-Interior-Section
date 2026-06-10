@@ -10,6 +10,124 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* Challenge points box */
+    .challenge-box {
+      background: var(--smoke);
+      border: 1px solid var(--ash);
+      border-top: 3px solid var(--red);
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .challenge-box__title {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .challenge-box__title::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 1.5px;
+      background: var(--red);
+    }
+    .challenge-box__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .9rem;
+      padding: .9rem 0;
+      border-bottom: 1px solid var(--ash);
+      font-size: .84rem;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+    .challenge-box__item:last-child { border-bottom: none; }
+    .challenge-box__num {
+      min-width: 24px;
+      height: 24px;
+      background: var(--red);
+      color: #fff;
+      font-size: .6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    /* Gallery grid replacement */
+    .project-scope {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 2rem;
+    }
+    .scope-card {
+      background: var(--smoke);
+      border: 1px solid var(--ash);
+      padding: 1.4rem 1.5rem;
+      position: relative;
+    }
+    .scope-card--featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: var(--ink);
+      padding: 0;
+    }
+    .scope-card--featured img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 280px;
+      display: block;
+    }
+    .scope-card--featured .scope-card__inner {
+      padding: 2rem 2rem 2rem 0;
+    }
+    .scope-card__room {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .4rem;
+    }
+    .scope-card__desc {
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--silver);
+    }
+    .scope-card--featured .scope-card__room { color: var(--red); }
+    .scope-card--featured .scope-card__desc { color: rgba(255,255,255,.55); }
+    .scope-card__heading {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+
+    @media (max-width: 700px) {
+      .project-scope { grid-template-columns: 1fr; }
+      .scope-card--featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .scope-card--featured .scope-card__inner { padding: 1.5rem; }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -100,13 +218,20 @@
         </div>
       </div>
       <div class="reveal-right">
-        <!--
-          IMAGE: cs-banani-challenge.jpg
-          TYPE: Empty restaurant shell OR architectural floor plan on screen.
-          Dimensions: 700×520px.
-        -->
-        <div style="aspect-ratio:4/3;overflow:hidden;">
-          <img src="../assets/images/cs-banani-challenge.jpg" alt="Empty restaurant space before HATIL interior design – Banani Dhaka" loading="lazy" width="700" height="520" />
+        <div class="challenge-box">
+          <div class="challenge-box__title">Key Challenges</div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">01</div>
+          <span>Seat 80 covers in a long, narrow 2,400 sq.ft space with an awkward structural column mid-floor</span>
+        </div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">02</div>
+          <span>Create an upscale, photograph-worthy atmosphere that drove repeat visits and social sharing</span>
+        </div>
+        <div class="challenge-box__item">
+          <div class="challenge-box__num">03</div>
+          <span>Integrate kitchen pass-through, bar counter, and host stand without breaking the dining flow</span>
+        </div>
         </div>
       </div>
     </div>
@@ -131,56 +256,45 @@
       </div>
     </div>
 
+        <!-- Project Scope -->
     <div class="cs-section reveal">
       <div class="cs-section__tag">Project Gallery</div>
-      <h2 class="cs-section__title">The Restaurant, Finished</h2>
-      <div class="cs-gallery cs-gallery--3" style="margin-top:2rem;">
-        <div class="cs-gallery__item" style="aspect-ratio:auto;min-height:500px;">
-          <!--
-            IMAGE: cs-banani-gallery-1.jpg
-            TYPE: Main dining floor — full view of tables, chairs, feature wall, warm lighting.
-            Dimensions: 900×500px.
-          -->
-          <img src="../assets/images/cs-banani-gallery-1.jpg" alt="Banani restaurant main dining floor – HATIL tables and chairs" loading="lazy" width="900" height="500" />
+      <h2 class="cs-section__title">Design Details</h2>
+
+      <div class="project-scope">
+        <div class="scope-card scope-card--featured">
+          <img src="../assets/images/project-banani-restaurant.jpg" alt="Banani fine dining restaurant interior design by HATIL" loading="lazy" />
+          <div class="scope-card__inner">
+            <div class="scope-card__room">Main Dining Floor</div>
+            <div class="scope-card__heading">Completed Project</div>
+            <div class="scope-card__desc">80 covers across 4- and 6-seat walnut-tone tables with cushioned burgundy dining chairs</div>
+          </div>
         </div>
-        <div class="cs-gallery__item" style="aspect-ratio:4/3;">
-          <!--
-            IMAGE: cs-banani-gallery-2.jpg
-            TYPE: Private dining alcove — intimate 10-seat section.
-            Dimensions: 600×450px.
-          -->
-          <img src="../assets/images/cs-banani-gallery-2.jpg" alt="Private dining alcove – Banani restaurant interior by HATIL" loading="lazy" width="600" height="450" />
+
+        <div class="scope-card">
+          <div class="scope-card__room">Private Dining Alcove</div>
+          <div class="scope-card__desc">10-seat intimate alcove using the structural column as a natural divider — high-back seating</div>
         </div>
-        <div class="cs-gallery__item" style="aspect-ratio:4/3;">
-          <!--
-            IMAGE: cs-banani-gallery-3.jpg
-            TYPE: Bar counter area — solid wood HATIL bar unit with stone top.
-            Dimensions: 600×450px.
-          -->
-          <img src="../assets/images/cs-banani-gallery-3.jpg" alt="Restaurant bar counter and shelving – HATIL commercial interior Banani" loading="lazy" width="600" height="450" />
+        <div class="scope-card">
+          <div class="scope-card__room">Bar Counter</div>
+          <div class="scope-card__desc">Custom solid wood HATIL unit with stone countertop, backlit shelving, 6 bar stools</div>
         </div>
-      </div>
-      <div class="cs-gallery cs-gallery--2" style="margin-top:6px;">
-        <div class="cs-gallery__item" style="aspect-ratio:16/9;">
-          <!--
-            IMAGE: cs-banani-gallery-4.jpg
-            TYPE: Detail shot — table setting close-up, chair detail, or feature wall shelving.
-            Dimensions: 800×450px.
-          -->
-          <img src="../assets/images/cs-banani-gallery-4.jpg" alt="HATIL dining furniture detail – restaurant table and chair craftsmanship" loading="lazy" width="800" height="450" />
+        <div class="scope-card">
+          <div class="scope-card__room">Feature Wall</div>
+          <div class="scope-card__desc">Ceiling-height open shelving unit — display space that creates visual depth and anchors the room</div>
         </div>
-        <div class="cs-gallery__item" style="aspect-ratio:16/9;">
-          <!--
-            IMAGE: cs-banani-gallery-5.jpg
-            TYPE: Restaurant entrance or host stand area — first impression of the space.
-            Dimensions: 800×450px.
-          -->
-          <img src="../assets/images/cs-banani-gallery-5.jpg" alt="Restaurant entrance and host stand – Banani HATIL interior design" loading="lazy" width="800" height="450" />
+        <div class="scope-card">
+          <div class="scope-card__room">Host Stand</div>
+          <div class="scope-card__desc">Custom HATIL front desk with integrated tablet provision and coat storage</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card__room">Materials</div>
+          <div class="scope-card__desc">Walnut-toned dining tables, burgundy fabric seating, solid wood bar — all custom-manufactured at HATIL Savar</div>
         </div>
       </div>
     </div>
 
-    <div class="cs-section reveal">
+<div class="cs-section reveal">
       <div class="cs-section__tag">The Results</div>
       <h2 class="cs-section__title">Fully Booked Within Two Weeks of Opening.</h2>
       <div class="cs-section__body">
