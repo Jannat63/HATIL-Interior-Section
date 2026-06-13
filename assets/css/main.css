@@ -1,3 +1,15 @@
+/* ═══ BARLOW SELF-HOSTED ════════════════════════════════════ */
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-Light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-LightItalic.ttf') format('truetype'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-Italic.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-MediumItalic.ttf') format('truetype'); font-weight:500; font-style:italic; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-SemiBoldItalic.ttf') format('truetype'); font-weight:600; font-style:italic; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Barlow'; src:url('../fonts/Barlow-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
+
     /* ═══════════════════════════════════════════
        RESET & VARIABLES
     ═══════════════════════════════════════════ */
@@ -13,7 +25,7 @@
       --silver:     #9A9490;
       --white:      #FFFFFF;
 
-      --serif:      'Cormorant Garamond', Georgia, serif;
+      --serif:      'Barlow', system-ui, sans-serif;
       --sans:       'DM Sans', system-ui, sans-serif;
 
       --max:        1280px;
@@ -318,7 +330,7 @@
     }
     .hero__title em {
       font-style: italic;
-      color: var(--red);
+      color: var(--white);
     }
 
     .hero__desc {
