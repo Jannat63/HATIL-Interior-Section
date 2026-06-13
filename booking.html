@@ -2224,8 +2224,12 @@
     }, 400);
   }
 
-  document.getElementById('modalClose').addEventListener('click', closeThankYouModal);
-  document.getElementById('modalBackdrop').addEventListener('click', closeThankYouModal);
+  // Use event delegation — modal HTML sits after this script block
+  document.addEventListener('click', function(e) {
+    if (e.target.id === 'modalClose' || e.target.id === 'modalBackdrop') {
+      closeThankYouModal();
+    }
+  });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeThankYouModal();
   });
